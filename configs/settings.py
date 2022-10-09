@@ -158,8 +158,6 @@ ESKIZ_SMS = {
     # 'password': env.str('ESKIZ_SMS_PASSWORD'),
     'email': os.getenv('ESKIZ_SMS_EMAIL'),
     'password': os.getenv('ESKIZ_SMS_PASSWORD'),
-    # 'email': 'zulfiqorrashidov@gmail.com',
-    # 'password': 'exsRuNL4aRCzJb3YIV3EIFXlV4WgdjpeKHQn0x97'
 }
 
 # cors headers
