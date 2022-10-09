@@ -39,12 +39,19 @@ class OrderImage(models.Model):
         return f"Image {self.id}"
 
 class Order(models.Model):
+    STATUSES = (
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('completed', 'Completed'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     from_place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='from_place', blank=True, null=True)
     to_place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='to_place', blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     image = models.FileField(upload_to='images/%Y/%m/%d/', blank=True, null=True, default=None, )
     # image = models.ForeignKey(OrderImage, blank=True, null=True, on_delete=models.CASCADE, related_name='order_image')
+    status = models.CharField(max_length=150, blank=True, null=True, choices=STATUSES)
     price = models.IntegerField(blank=True, null=True, default=0, help_text='Price in UZS')
     is_active = models.BooleanField(default=True)
 
