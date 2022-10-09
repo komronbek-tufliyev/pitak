@@ -1,7 +1,7 @@
 from django.db import models
 from .managers import UserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
 
@@ -9,6 +9,7 @@ from django.core.validators import RegexValidator
 # Create your models here.
 
 class User(AbstractUser):
+    username = None
     phone_regex = RegexValidator(regex=r'^[+]998[0-9]{2}[0-9]{7}$', message="Faqat +998xxxxxxxxx formatida raqam kiriting")
     phone = models.CharField(_('Telefon raqam'), validators=[phone_regex], max_length=13, unique=True)
     phone2 = models.CharField(validators=[phone_regex], max_length=13, unique=True, blank=True, null=True)
@@ -77,7 +78,9 @@ class UserOTP(models.Model):
 
 
 class SMSLog(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sms')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_sms')
+    phone = models.CharField(max_length=13, blank=True, null=True)
+    count = models.IntegerField(default=0)
     message = models.CharField(max_length=255, blank=True, null=True)
     is_deleted = models.BooleanField(default=False)
 

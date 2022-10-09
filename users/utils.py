@@ -16,5 +16,5 @@ def send_otp(phone: str, message: str) -> None:
     """
         Send OTP message to user
     """
-    eskiz_conf.send_sms(mobile_phone=phone, message=message, from_whom='4546', callback_url='http://0000.uz/test.php')
+    eskiz_conf.send_sms(mobile_phone=phone.replace('+', ''), message=message, from_whom='4546', callback_url='http://0000.uz/test.php')
     print(f"SMS {phone} raqamiga yuborildi")

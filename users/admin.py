@@ -32,9 +32,9 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(UserOTP)
 class UserOTPAdmin(admin.ModelAdmin):
-    list_display = ('user.phone', 'otp', 'is_verified', 'is_deleted')
+    list_display = ('user', 'otp', 'is_verified', 'is_deleted')
     list_filter = ('is_verified', 'is_deleted')
-    search_fields = ('user.phone', 'otp')
+    search_fields = ('user', 'otp')
     ordering = ('-id',)
 
     class Meta:
@@ -42,9 +42,9 @@ class UserOTPAdmin(admin.ModelAdmin):
 
 @admin.register(SMSLog)
 class SMSLogAdmin(admin.ModelAdmin):
-    list_display = ('user.phone', 'sms_text', 'sms_type', 'is_deleted')
+    list_display = ('phone', 'message', 'count', 'is_deleted')
     list_filter = ('is_deleted',)
-    search_fields = ('user.phone', 'sms_text')
+    search_fields = ('phone', 'message')
     ordering = ('-id',)
 
     class Meta:
@@ -52,9 +52,9 @@ class SMSLogAdmin(admin.ModelAdmin):
 
 @admin.register(SMSToken)
 class SMSTokenAdmin(admin.ModelAdmin):
-    list_display = ('user.phone', 'token', 'is_deleted')
+    list_display = ('user', 'token', 'is_deleted')
     list_filter = ('is_deleted',)
-    search_fields = ('user.phone', 'token')
+    search_fields = ('user', 'token')
     ordering = ('-id',)
 
     class Meta:

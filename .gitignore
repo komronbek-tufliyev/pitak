@@ -2,3 +2,5 @@ __pycache__
 venv
 .env
 db.sqlite3
+images
+staticfiles

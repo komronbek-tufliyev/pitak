@@ -1,0 +1,1 @@
+{'image': [<InMemoryUploadedFile: csgo.jpg (image/jpeg)>], 'price': 100000, 'is_active': True, 'user': <User: +998900112116>, 'from_place': <Place: Toshkent - Mirzo Ulug'bek>, 'to_place': <Place: Qashqadaryo - Qamashi>}{'price': 100000, 'is_active': True, 'user': <User: +998900112116>, 'from_place': <Place: Toshkent - Mirzo Ulug'bek>, 'to_place': <Place: Qashqadaryo - Qamashi>}

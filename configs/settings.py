@@ -10,23 +10,31 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from os import environ
 from pathlib import Path
-from environs import Env
 import dj_database_url
+import os
+# import environ
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = Env()
-env.read_env()
+
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = 'django-insecure-bqz4u(vzns=i($!nn#jmn3g&d+_9j+qralyk)f)&%zj4b)nh(x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = os.getenv('DEBUG', False)
+# DEBUG = env.bool('DEBUG', default=False)
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*'] # or ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
@@ -46,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'debug_toolbar',
+    'drf_yasg',
     
 
     # local apps
@@ -92,7 +101,7 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=env('DATABASE_URL')
+        default=os.getenv('DATABASE_URL')
     )
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -145,8 +154,12 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # sms services configs
 ESKIZ_SMS = {
-    'email': env.str('ESKIZ_SMS_EMAIL'),
-    'password': env.str('ESKIZ_SMS_PASSWORD'),
+    # 'email': env.str('ESKIZ_SMS_EMAIL'),
+    # 'password': env.str('ESKIZ_SMS_PASSWORD'),
+    'email': os.getenv('ESKIZ_SMS_EMAIL'),
+    'password': os.getenv('ESKIZ_SMS_PASSWORD'),
+    # 'email': 'zulfiqorrashidov@gmail.com',
+    # 'password': 'exsRuNL4aRCzJb3YIV3EIFXlV4WgdjpeKHQn0x97'
 }
 
 # cors headers
