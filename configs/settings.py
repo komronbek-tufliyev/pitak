@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECRET_KEY = 'django-insecure-bqz4u(vzns=i($!nn#jmn3g&d+_9j+qralyk)f)&%zj4b)nh(x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', False)
 # DEBUG = env.bool('DEBUG', default=False)
 # DEBUG = True
 
@@ -156,8 +156,8 @@ LOGOUT_REDIRECT_URL = 'home'
 ESKIZ_SMS = {
     # 'email': env.str('ESKIZ_SMS_EMAIL'),
     # 'password': env.str('ESKIZ_SMS_PASSWORD'),
-    'email': os.getenv('ESKIZ_SMS_EMAIL'),
-    'password': os.getenv('ESKIZ_SMS_PASSWORD'),
+    'email': os.environ.get('ESKIZ_SMS_EMAIL'),
+    'password': os.environ.get('ESKIZ_SMS_PASSWORD'),
 }
 
 # cors headers
