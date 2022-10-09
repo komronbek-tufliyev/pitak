@@ -71,21 +71,8 @@ class OrderListCreateAPIView(ListCreateAPIView):
     queryset = Order.objects.all()
     permission_classes = (IsAuthenticated, )
 
-    def create(self, request):
-        serializer = self.serializer_class(data=request.data, many=True)
-        if serializer.is_valid():
-            print("serializer is valid", serializer)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print("serializer is not valid", serializer)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class OrderListAPIView(ListAPIView):
-    permission_classes = (AllowAny, )
-    serializer_class = OrderSerializer
     def post(self, request, format=None, *args, **kwargs):
-        serializer = OrderImageSerializer(data=request.data)
+        serializer = OrderImageSerializer(data=request.data, many=True)
         if serializer.is_valid():
             qs = serializer.save()
             message = {'detail': qs, 'status': {'code': 200, 'message': 'success', 'simple': status.HTTP_201_CREATED, }}
@@ -94,8 +81,14 @@ class OrderListAPIView(ListAPIView):
             data = {'detail': serializer.errors, 'status': {'code': 400, 'message': 'error', 'simple': status.HTTP_400_BAD_REQUEST}}
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
+
+class OrderListAPIView(ListAPIView):
+    permission_classes = (AllowAny, )
+    serializer_class = OrderSerializer
+
     def get_queryset(self):
-        return Order.objects.all()
+        queryset = Order.objects.all()
+        return queryset
 
 class OrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer
