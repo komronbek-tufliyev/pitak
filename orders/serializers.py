@@ -31,13 +31,14 @@ class OrderImageSerializer(serializers.ModelSerializer):
         user = validated_data['user']
         from_place = validated_data['from_place']
         to_place = validated_data['to_place']
+        car = validated_data['car']
         price = validated_data['price']
         is_active = True if validated_data['is_active'] else False
         image = validated_data.pop('image')
         image_list = []
         fin.write(str(validated_data))
         for img in image:
-            photo = Order.objects.create(user=user, from_place=from_place, to_place=to_place, image=img, price=price, is_active=is_active)
+            photo = Order.objects.create(user=user, from_place=from_place, to_place=to_place, image=img, price=price, is_active=is_active, car=car)
             image_url = photo.image.url
             image_list.append(image_url)
         return image_list

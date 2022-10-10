@@ -6,9 +6,9 @@ from .models import Order, OrderHistory, Place
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'from_place', 'status', 'price', 'is_active', 'date', 'image', )
-    list_filter = ('status', 'from_place', 'to_place', 'is_active', )
-    search_fields = ('user', 'from_place', 'to_place', 'price', )
+    list_display = ('id', 'user', 'car', 'from_place', 'status', 'price', 'is_active', 'date', 'image', )
+    list_filter = ('status', 'car', 'from_place', 'to_place', 'is_active', )
+    search_fields = ('user', 'car', 'from_place', 'to_place', 'price', )
     ordering = ('-id',)
 
     class Meta:
