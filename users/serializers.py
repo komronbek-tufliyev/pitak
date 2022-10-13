@@ -22,6 +22,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'phone', 'full_name', 'phone2', 'is_verified', 'is_deleted']
 
+    def login(self, validated_data):
+        phone = validated_data['phone']
+        password = validated_data['password']
+        user = authenticate(phone=phone, password=password)
+        if user:
+            return user
+        else:
+            return False
+
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

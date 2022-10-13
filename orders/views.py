@@ -72,6 +72,21 @@ class OrderListCreateAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, )
 
     def post(self, request, format=None, *args, **kwargs):
+        data = request.data
+        print(f"Data {data}, type: {type(data)}")
+        user: User = User.objects.get(pk=data['user'])
+        context: dict = {
+            'id': data['id'],
+            'user_full_name': user.full_name,
+            'user_phone': user.phone,
+            'from_place':  data['from_place'],
+            'to_place': data['to_place'],
+            'price': data['price'],
+            'car': data['car'],
+            'date': data['date'],
+            'description': data['description'],
+        }
+        print(f"Context: {context}")
         serializer = OrderImageSerializer(data=request.data, many=True)
         if serializer.is_valid():
             qs = serializer.save()
@@ -89,6 +104,41 @@ class OrderListAPIView(ListAPIView):
     def get_queryset(self):
         queryset = Order.objects.all()
         return queryset
+
+    def get(self, request, format=None, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = OrderSerializer(queryset, many=True)
+        try:
+
+            data: dict = serializer.data[0]
+            print(f"Data {data}")
+            
+            
+            from_place = data.get('from_place')
+            # to_place = data.get('to_place')[0]
+            print(f"From place {from_place['region']}")
+            # print(f"To place {to_place}")
+            # print(f"Price {data.get('price')}")
+            user = User.objects.get(pk=data['user'])
+            context: dict = {
+                'id': data['id'],
+                'user_full_name': user.full_name,
+                'user_phone': user.phone,
+                'from_place':  data['from_place'],
+                'to_place': data['to_place'],
+                'price': data['price'],
+                'car': data['car'],
+                'date': data['date'],
+                'description': data['description'],
+            }
+            print(f"Context: {context}")
+            # print(f"FroM: {from_place}")
+            # print(f"To: {to_place}")
+        except Exception as e:
+            print(f"Error: {e}")
+            pass
+        return Response(context, status=status.HTTP_200_OK)
+
 
 class OrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer

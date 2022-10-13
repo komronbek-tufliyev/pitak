@@ -140,6 +140,9 @@ class LoginView(APIView):
        
 
     def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
         data = request.data
         self.validate(data)
         phone = data.get('phone')
@@ -165,6 +168,8 @@ class LogoutView(APIView):
         return Response({'message': 'User logged out successfully'}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
         user = request.user
         user.is_verified = False
         logout(request)

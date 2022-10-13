@@ -28,13 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = 'django-insecure-bqz4u(vzns=i($!nn#jmn3g&d+_9j+qralyk)f)&%zj4b)nh(x'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-bqz4u(vzns=i($!nn#jmn3g&d+_9j+qralyk)f)&%zj4b)nh(x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+# DEBUG = os.environ.get('DEBUG', False)
 # DEBUG = env.bool('DEBUG', default=False)
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['*'] # or ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
@@ -101,13 +101,13 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')
-    )
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    # 'default': dj_database_url.config(
+    #     default=os.getenv('DATABASE_URL')
+    # )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -165,8 +165,10 @@ LOGOUT_REDIRECT_URL = 'home'
 ESKIZ_SMS = {
     # 'email': env.str('ESKIZ_SMS_EMAIL'),
     # 'password': env.str('ESKIZ_SMS_PASSWORD'),
-    'email': os.environ.get('ESKIZ_SMS_EMAIL'),
-    'password': os.environ.get('ESKIZ_SMS_PASSWORD'),
+    # 'email': os.environ.get('ESKIZ_SMS_EMAIL'),
+    # 'password': os.environ.get('ESKIZ_SMS_PASSWORD'),
+    'email': 'zulfiqorrashidov@gmail.com',
+    'password': 'exsRuNL4aRCzJb3YIV3EIFXlV4WgdjpeKHQn0x97',
 }
 
 # cors headers
@@ -184,6 +186,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     'PAGE_SIZE': 10,
 # }
 
+# DATE INPUT FORMAT 
+DATE_INPUT_FORMATS = (
+    "%d-%m-%Y",
+    "%d/%m/%Y",
+)
 
 
 # Default primary key field type
